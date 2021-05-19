@@ -15,6 +15,7 @@
 #'to be found in Trevors paper.
 #'@param niter Maximum Number of Iteration
 #'@param tol Tolerance of the difference between two result from iteration
+#'@param lambda Regularization parameter
 #'
 #'@return The solution to the elastic net system according to given parameter.
 #'
@@ -28,6 +29,7 @@ elnet_coord <- function( y,
                          X,
                          beta0 = NA,
                          alpha = 0,
+                         lambda = 0,
                          niter = 1e+4,
                          tol = 1e-5
 ){

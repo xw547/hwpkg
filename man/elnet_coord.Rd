@@ -4,7 +4,15 @@
 \alias{elnet_coord}
 \title{Elastic Net}
 \usage{
-elnet_coord(y, X, beta0 = NA, alpha = 0, niter = 10000, tol = 1e-05)
+elnet_coord(
+  y,
+  X,
+  beta0 = NA,
+  alpha = 0,
+  lambda = 0,
+  niter = 10000,
+  tol = 1e-05
+)
 }
 \arguments{
 \item{y}{The constant vector}
@@ -16,6 +24,8 @@ set to a zero vector.}
 
 \item{alpha}{The elastic net parameter, alpha should be in [0,1]. More details
 to be found in Trevors paper.}
+
+\item{lambda}{Regularization parameter}
 
 \item{niter}{Maximum Number of Iteration}
 
