@@ -59,7 +59,7 @@ elnet_coord <- function( y,
 
   }
 
-  if(is.na(beta0)){
+  if(is.na(beta0)[1]){
     beta0 = rep(1, dim(X)[2])
   }
   return(Elastic(y, X, beta0, alpha, lambda, niter, tol))
