@@ -88,20 +88,21 @@ if(method == "Gauss" && parallel){
   }
 }
 
-#'@export
+
 ###The helper and the actual functions to implement
+#'@export
 getutri <- function(A){
   return(as.matrix(A-tril(A)))
 }
 
-#'@export
+
 ###Same idea from the previous one.
+#'@export
 getltri <- function(A){
   return(as.matrix(A-triu(A)))
 }
-
-#'@export
 ###Gauss-Seidel Method
+#'@export
 GS <- function(A, b, x) {
   a <- diag(A)
   diag(A) <- 0
@@ -165,9 +166,8 @@ seq_Jacobi <- function(A, b, x0, maxiter = 10000, tol =1e-5){
   }
   return(all.x)
 }
-
-#'@export
 ###Parallel Jacobi
+#'@export
 PJacobi <- function(A, b, x){
   a <- diag(A)
   diag(A) <- 0

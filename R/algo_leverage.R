@@ -67,8 +67,9 @@ algo_leverage <- function(
 
   }
 }
-#'@export
+
 ###Existing Functions
+#'@export
 package_weighted <- function(r,Pi_weighted,draws) {
   Beta_Hat_weighted_500 = c()
   for (i in 1:draws){

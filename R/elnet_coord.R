@@ -63,8 +63,9 @@ elnet_coord <- function( y,
   return(Elastic(y, X, beta0, alpha, lambda, niter, tol))
 }
 
-#'@export
+
 ###Existing functions
+#'@export
 soft_threshhold <- function(innerprod, lambda) {
   return(sign(innerprod)*max(0, abs(innerprod)- lambda))
 }
