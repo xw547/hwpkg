@@ -177,6 +177,7 @@ PJacobi <- function(A, b, x){
   x_new = as.vector(unlist(outlist))
   return(x_new)
 }
+
 #'@export
 para_Jacobi <- function(A, b, x0, maxiter = 10000, tol =1e-5){
   error = 1000
