@@ -15,4 +15,5 @@ RoxygenNote: 7.1.1
 Inports:
     matrixStats,
     Matrix,
-    doParallel
+    doParallel,
+    pracma
