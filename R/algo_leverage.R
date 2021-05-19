@@ -52,35 +52,6 @@ algo_leverage <- function(
 
   }
 
-###Existing Functions
-  package_weighted <- function(r,Pi_weighted,draws) {
-    Beta_Hat_weighted_500 = c()
-    for (i in 1:draws){
-      index_2=sample(c(1:n), size = r, replace = T,prob=Pi_weighted)
-      X_star_2=X[index_2]
-      y_star_2=y[index_2]
-      Phi_2=1/ (Pi_weighted[index_2]^{1/2})
-      model_2 <- lm(y_star_2 ~ 0 + X_star_2 , weights=Phi_2)
-
-      beta_hat_2=model_2$coefficients
-      Beta_Hat_weighted_500[i]=beta_hat_2
-    }
-    return(Beta_Hat_weighted_500)
-  }
-
-  package_unif <- function(r,Pi_unif, draws) {
-    Beta_Hat_unif_500 = c()
-    for (i in 1:draws){
-      index_1=sample(c(1:n), size = r, replace = T,prob=Pi_unif)
-      X_star_1=X[index_1]
-      y_star_1=y[index_1]
-      Phi_1=1/ (Pi_unif[index_1]^{1/2})
-      model_1 <- lm(y_star_1 ~ 0 + X_star_1 , weights=Phi_1)
-      beta_hat_1=model_1$coefficients
-      Beta_Hat_unif_500[i]=beta_hat_1
-    }
-    return(Beta_Hat_unif_500)
-  }
 
   if (method == "uniform"){
     Pi = rep(1/n, n)
@@ -95,5 +66,36 @@ algo_leverage <- function(
     warning("invalid method parameter")
 
   }
+}
+#'@export
+###Existing Functions
+package_weighted <- function(r,Pi_weighted,draws) {
+  Beta_Hat_weighted_500 = c()
+  for (i in 1:draws){
+    index_2=sample(c(1:n), size = r, replace = T,prob=Pi_weighted)
+    X_star_2=X[index_2]
+    y_star_2=y[index_2]
+    Phi_2=1/ (Pi_weighted[index_2]^{1/2})
+    model_2 <- lm(y_star_2 ~ 0 + X_star_2 , weights=Phi_2)
+
+    beta_hat_2=model_2$coefficients
+    Beta_Hat_weighted_500[i]=beta_hat_2
+  }
+  return(Beta_Hat_weighted_500)
+}
+
+#'@export
+package_unif <- function(r,Pi_unif, draws) {
+  Beta_Hat_unif_500 = c()
+  for (i in 1:draws){
+    index_1=sample(c(1:n), size = r, replace = T,prob=Pi_unif)
+    X_star_1=X[index_1]
+    y_star_1=y[index_1]
+    Phi_1=1/ (Pi_unif[index_1]^{1/2})
+    model_1 <- lm(y_star_1 ~ 0 + X_star_1 , weights=Phi_1)
+    beta_hat_1=model_1$coefficients
+    Beta_Hat_unif_500[i]=beta_hat_1
+  }
+  return(Beta_Hat_unif_500)
 }
 

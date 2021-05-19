@@ -68,109 +68,6 @@ if(method == "Gauss" && parallel){
   warning("The parallel is only applicable when using the Jacobi method")
 }
 
-###The helper and the actual functions to implement
-getutri <- function(A){
-  return(as.matrix(A-tril(A)))
-}
-
-###Same idea from the previous one.
-getltri <- function(A){
-  return(as.matrix(A-triu(A)))
-}
-###Gauss-Seidel Method
-  GS <- function(A, b, x) {
-    a <- diag(A)
-    diag(A) <- 0
-    for (i in 1:length(x)) {
-      x[i] <- (b[i] - crossprod(A[i, ], x))/a[i]
-    }
-    return(x)
-  }
-
-  GSMethod <- function(A, b, x0, maxiter = 10000, tol =1e-5){
-    error = 1000
-    n = 1
-    all.x = x0
-    while (error > tol) {
-      x <- c(GS(A, b, x0))
-      all.x <- rbind(all.x, x)
-      if (any(abs(x) == Inf))
-        stop("The algorithm diverges")
-      error <- crossprod(x - x0)^0.5
-      if (n == maxiter) {
-        warning("Max iteration reached")
-        break
-      }
-      n <- n + 1
-      x0 <- x
-    }
-    return(all.x)
-  }
-
-
-  ###Jacobi Method
-
-  Jacobi <- function(A, b, x){
-    a <- diag(A)
-    diag(A) <- 0
-    x_new <- c()
-    for (i in 1:length(x)) {
-      x_new[i] <- (b[i] - crossprod(A[i, ], x))/a[i]
-    }
-    return(x_new)
-  }
-
-  seq_Jacobi <- function(A, b, x0, maxiter = 10000, tol =1e-5){
-    error = 1000
-    n = 1
-    all.x = x0
-    while (error > tol) {
-      x <- c(Jacobi(A, b, x0))
-      all.x <- rbind(all.x, x)
-      if (any(abs(x) == Inf))
-        stop("The algorithm diverges")
-      error <- crossprod(x - x0)^0.5
-      if (n == maxiter) {
-        warning("Max iteration reached")
-        break
-      }
-      n <- n + 1
-      x0 <- x
-    }
-    return(all.x)
-  }
-
-  ###Parallel Jacobi
-  PJacobi <- function(A, b, x){
-    a <- diag(A)
-    diag(A) <- 0
-    outlist = foreach (i = 1:length(x),  .multicombine = TRUE)  %dopar% {
-      (b[i] - crossprod(A[i, ], x))/a[i]
-    }
-    x_new = as.vector(unlist(outlist))
-    return(x_new)
-  }
-
-  para_Jacobi <- function(A, b, x0, maxiter = 10000, tol =1e-5){
-    error = 1000
-    n = 1
-    all.x = x0
-    while (error > tol) {
-      x <- c(PJacobi(A, b, x0))
-      all.x <- rbind(all.x, x)
-      if (any(abs(x) == Inf))
-        stop("The algorithm diverges")
-      error <- crossprod(x - x0)^0.5
-      if (n == maxiter) {
-        warning("Max iteration reached")
-        break
-      }
-      n <- n + 1
-      x0 <- x
-    }
-    return(all.x)
-  }
-
 ###Solve the problem using designated method.
   if (method == "Gauss"){
     result = GSMethod(A, b, x0, maxiter, tol)
@@ -190,3 +87,114 @@ getltri <- function(A){
     return(tail(result, n = 1))
   }
 }
+
+#'@export
+###The helper and the actual functions to implement
+getutri <- function(A){
+  return(as.matrix(A-tril(A)))
+}
+
+#'@export
+###Same idea from the previous one.
+getltri <- function(A){
+  return(as.matrix(A-triu(A)))
+}
+
+#'@export
+###Gauss-Seidel Method
+GS <- function(A, b, x) {
+  a <- diag(A)
+  diag(A) <- 0
+  for (i in 1:length(x)) {
+    x[i] <- (b[i] - crossprod(A[i, ], x))/a[i]
+  }
+  return(x)
+}
+
+#'@export
+GSMethod <- function(A, b, x0, maxiter = 10000, tol =1e-5){
+  error = 1000
+  n = 1
+  all.x = x0
+  while (error > tol) {
+    x <- c(GS(A, b, x0))
+    all.x <- rbind(all.x, x)
+    if (any(abs(x) == Inf))
+      stop("The algorithm diverges")
+    error <- crossprod(x - x0)^0.5
+    if (n == maxiter) {
+      warning("Max iteration reached")
+      break
+    }
+    n <- n + 1
+    x0 <- x
+  }
+  return(all.x)
+}
+
+
+###Jacobi Method
+#'@export
+Jacobi <- function(A, b, x){
+  a <- diag(A)
+  diag(A) <- 0
+  x_new <- c()
+  for (i in 1:length(x)) {
+    x_new[i] <- (b[i] - crossprod(A[i, ], x))/a[i]
+  }
+  return(x_new)
+}
+
+#'@export
+seq_Jacobi <- function(A, b, x0, maxiter = 10000, tol =1e-5){
+  error = 1000
+  n = 1
+  all.x = x0
+  while (error > tol) {
+    x <- c(Jacobi(A, b, x0))
+    all.x <- rbind(all.x, x)
+    if (any(abs(x) == Inf))
+      stop("The algorithm diverges")
+    error <- crossprod(x - x0)^0.5
+    if (n == maxiter) {
+      warning("Max iteration reached")
+      break
+    }
+    n <- n + 1
+    x0 <- x
+  }
+  return(all.x)
+}
+
+#'@export
+###Parallel Jacobi
+PJacobi <- function(A, b, x){
+  a <- diag(A)
+  diag(A) <- 0
+  outlist = foreach (i = 1:length(x),  .multicombine = TRUE)  %dopar% {
+    (b[i] - crossprod(A[i, ], x))/a[i]
+  }
+  x_new = as.vector(unlist(outlist))
+  return(x_new)
+}
+#'@export
+para_Jacobi <- function(A, b, x0, maxiter = 10000, tol =1e-5){
+  error = 1000
+  n = 1
+  all.x = x0
+  while (error > tol) {
+    x <- c(PJacobi(A, b, x0))
+    all.x <- rbind(all.x, x)
+    if (any(abs(x) == Inf))
+      stop("The algorithm diverges")
+    error <- crossprod(x - x0)^0.5
+    if (n == maxiter) {
+      warning("Max iteration reached")
+      break
+    }
+    n <- n + 1
+    x0 <- x
+  }
+  return(all.x)
+}
+
