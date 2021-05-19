@@ -42,12 +42,12 @@ algo_leverage <- function(
   }
 
 
-  if (size%%1 != 0 || size<0 || is.nan(size) ){
+  if (size%%1 != 0 || size<0 || is.na(size) ){
     warning("size should be a positive interger")
 
   }
 
-  if (draws%%1 != 0 || draws<0 || is.nan(draws) ){
+  if (draws%%1 != 0 || draws<0 || is.na(draws) ){
     warning("draws should be a positive interger")
 
   }

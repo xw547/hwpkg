@@ -45,16 +45,16 @@ elnet_coord <- function( y,
 
     }
   }
-  if (alpha<0 || alpha>1 || isnan(alpha)){
+  if (alpha<0 || alpha>1 || is.na(alpha)){
     warning("the value of alpha isn't valid, should be within [0,1]")
 
   }
-  if (niter%%1 != 0 || niter<0 || is.nan(niter) ){
+  if (niter%%1 != 0 || niter<0 || is.na(niter) ){
     warning("niter should be a positive interger")
 
   }
 
-  if (tol<0 || is.nan(tol) ){
+  if (tol<0 || is.na(tol) ){
     warning("tol should be a positive number")
 
   }
