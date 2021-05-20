@@ -73,7 +73,7 @@ if(method == "Gauss" && parallel){
     result = GSMethod(A, b, x0, maxiter, tol)
   }
   if (method == "Jacobi"){
-    if(parallel){
+    if(!parallel){
     result = seq_Jacobi(A, b, x0, maxiter, tol)
     }else{
     cl <- makeCluster(numCores)
