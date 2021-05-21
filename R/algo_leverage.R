@@ -55,13 +55,13 @@ algo_leverage <- function(
 
   if (method == "uniform"){
     Pi = rep(1/n, n)
-    return(package_unif(y, X, size, Pi,draws))
+    return(package_unif(y, X, n, size, Pi,draws))
   } else if(method  == "weighted"){
     XTXinv = solve(t(X)%*%X)
     H =X%*%XTXinv%*%t(X)
     H_ii = diag(H)/sum(diag(H))
     Pi = H_ii
-    return(package_weighted(y, X, size, Pi,draws))
+    return(package_weighted(y, X, n, size, Pi,draws))
   } else {
     warning("invalid method parameter")
 
@@ -70,7 +70,7 @@ algo_leverage <- function(
 
 ###Existing Functions
 #'@export
-package_weighted <- function(y, X, r,Pi_weighted,draws) {
+package_weighted <- function(y, X, n, r, Pi_weighted, draws) {
   Beta_Hat_weighted_500 = c()
   for (i in 1:draws){
     index_2=sample(c(1:n), size = r, replace = T,prob=Pi_weighted)
@@ -86,7 +86,7 @@ package_weighted <- function(y, X, r,Pi_weighted,draws) {
 }
 
 #'@export
-package_unif <- function(y, X, r,Pi_unif, draws) {
+package_unif <- function(y, X, n, r, Pi_unif, draws) {
   Beta_Hat_unif_500 = c()
   for (i in 1:draws){
     index_1=sample(c(1:n), size = r, replace = T,prob=Pi_unif)
