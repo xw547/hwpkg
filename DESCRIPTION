@@ -13,8 +13,7 @@ RoxygenNote: 7.1.1
 Depends:
     matrixStats,
     Matrix,
-    doParallel
-Suggests: 
+    doParallel,
     rmarkdown,
     knitr
 VignetteBuilder: knitr

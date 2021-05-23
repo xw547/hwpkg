@@ -85,7 +85,7 @@ if(method == "Gauss" && parallel){
   if (full_result){
     return(result)
   }else{
-    return(tail(result, n = 1))
+    return(c(tail(result, n = 1)))
   }
 }
 

@@ -56,14 +56,28 @@ b_1 = A_1%*%v
 b_2 = A_2%*%v
 b_3 = A_3%*%v
 
+###A_1, and the both algorithm is diverged
+# solve_ols(A_1,b_1)
+# solve_ols(A_1, b_1, method = "Jacobi")
 
+###A_3,
+#Gauss-Seidel Method
+solve_ols(A_3, b_3, method = "Gauss")
+#Sequential Jacobi Method
+solve_ols(A_3, b_3, method = "Jacobi")
+#Parallel Jacobi
+solve_ols(A_3, b_3, method = "Jacobi", parallel = TRUE)
+```
+
+The unsolvable linear system $A_1, b_1$ should return warning, and they are 
+commented out in the code chunk. Also, we can give an output of the full result 
+of each iteration. And each row should be the result from one of the iteration.
+
+```{r}
+solve_ols(A_3, b_3, method = "Gauss", full_result = TRUE)
 ```
 
 
-
-
-
-
-
-
+## algo_leverage
+Also, you can implement the method by 
 
