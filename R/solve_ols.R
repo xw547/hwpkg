@@ -65,7 +65,8 @@ x0 = rep(0, dim(A)[2])
 }
 
 if(method == "Gauss" && parallel){
-  warning("The parallel is only applicable when using the Jacobi method")
+  warning("The parallel is only applicable when using the Jacobi methods, the
+          convergence condition doesn't hold")
 }
 
 ###Solve the problem using designated method.

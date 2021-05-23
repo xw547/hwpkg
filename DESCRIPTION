@@ -14,4 +14,7 @@ Depends:
     matrixStats,
     Matrix,
     doParallel
-    
+Suggests: 
+    rmarkdown,
+    knitr
+VignetteBuilder: knitr

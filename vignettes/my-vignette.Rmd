@@ -1,0 +1,69 @@
+---
+title: "Testing for Xiaohan's package"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{my-vignette}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+## Introduction
+First off, thank you so much for downloading my package, and the name of it is
+just my netid:xw547. To load the package, you may use:
+
+
+```{r setup}
+library(xw547)
+```
+
+As required by Professor Basu, there are three functions. Also, there are several
+helper functions. To wit, you may use the command below to 
+```{r}
+??xw547
+```
+By clicking xw547::overview, you may find an overview of my functions. 
+
+Then, we would proceed to the testing part of my package.
+
+## solve_ols
+As the name indicates, the function is an implementation of the Gauss-Seidel and 
+the Jacobi method we metioned in class.
+
+As always, you cal always check out the helper documentation by 
+```{r}
+?solve_ols
+```
+
+And we can do a simulation similar to what we have done in the HW1
+```{r}
+###Helper function that generates A in HW1
+generate_A <- function(n, alpha){
+  A <- diag(rep(alpha,n))
+  for (i in 1:(n-1)){
+    A[i+1, i] <- -1
+    A[i, i+1] <- -1
+  }
+  return(A)
+}
+
+###generate data matrix and response
+A_1 = generate_A(100,1)
+A_2 =generate_A(100,2)
+A_3 =generate_A(100,3)
+
+v = rep(c(1,0),50)
+b_1 = A_1%*%v
+b_2 = A_2%*%v
+b_3 = A_3%*%v
+
+
+```
+
+
+
+
+
+
+
+
+
