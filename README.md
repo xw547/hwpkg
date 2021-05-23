@@ -8,7 +8,7 @@ library("devtools")
 devtools::install_github('xw547/hwpkg')
 ```
 
-However, the browseVignettes() will only work if this the package is built and saved as .tar.gz file. But you can always my vignette file under the /vignette directory. Please feel free to contact me if you prefer using the browse browseVignettes() function.
+However, the browseVignettes() will only work if this the package is built and saved as .tar.gz file. But you can always my vignette file under the /vignette directory. Please feel free to contact me if you prefer using the browseVignettes() function.
 
 Sorry, this package haven't finish yet, since I found several critial mistakes when checking. I'll done by this weekend. Thank you for waiting.
 
