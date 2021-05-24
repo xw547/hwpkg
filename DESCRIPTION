@@ -15,5 +15,6 @@ Depends:
     Matrix,
     doParallel,
     rmarkdown,
-    knitr
+    knitr,
+    mvtnorm
 VignetteBuilder: knitr

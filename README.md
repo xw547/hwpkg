@@ -5,7 +5,7 @@ To try it out, use the code below
 
 ```r
 library("devtools")
-devtools::install_github('xw547/hwpkg')
+devtools::install_github('xw547/hwpkg', build_vignettes = TRUE)
 ```
 
 However, the browseVignettes() will only work if this the package is built and saved as .tar.gz file. But you can always my vignette file under the /vignette directory. Please feel free to contact me if you prefer using the browseVignettes() function.
