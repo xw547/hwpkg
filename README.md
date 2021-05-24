@@ -12,14 +12,17 @@ If you are looking for my vignettes file, please use
 ```r
 browseVignettes("xw547")
 ```
+in R console.
 
-Also, you can use  
+Also, you can also use  
 
 ```
 wget https://github.com/xw547/hwpkg/raw/master/vignettes/my-vignette.Rmd
 ```
 
-in terminal. Or got to [this](https://github.com/xw547/hwpkg/blob/master/vignettes/my-vignette.Rmd)
+in terminal. 
+
+Or got to [this](https://github.com/xw547/hwpkg/blob/master/vignettes/my-vignette.Rmd)
 and right click Raw and "save as" to download
 
 Happy testing!
