@@ -7,7 +7,7 @@ To try it out, use the code below
 library("devtools")
 devtools::install_github('xw547/hwpkg', build_vignettes = TRUE)
 ```
-Also, if you are looking for my vignettes file, please use
+If you are looking for my vignettes file, please use
 
 ```r
 browseVignettes("xw547")
