@@ -7,8 +7,20 @@ To try it out, use the code below
 library("devtools")
 devtools::install_github('xw547/hwpkg', build_vignettes = TRUE)
 ```
+Also, if you are looking for my vignettes file, please use
 
-However, the browseVignettes() will only work if this the package is built and saved as .tar.gz file. But you can always my vignette file under the /vignette directory. Please feel free to contact me if you prefer using the browseVignettes() function.
+```r
+browseVignettes("xw547")
+```
 
-Sorry, this package haven't finish yet, since I found several critial mistakes when checking. I'll done by this weekend. Thank you for waiting.
+Also, you can use  
+
+```
+wget https://github.com/xw547/hwpkg/raw/master/vignettes/my-vignette.Rmd
+```
+
+in terminal. Or got to [this]{https://github.com/xw547/hwpkg/blob/master/vignettes/my-vignette.Rmd}
+and right click Raw and "save as" to download
+
+Happy testing!
 
