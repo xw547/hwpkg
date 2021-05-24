@@ -71,7 +71,7 @@ solve_ols(A_3, b_3, method = "Jacobi", parallel = TRUE)
 
 The unsolvable linear system $A_1, b_1$ should return warning, and they are 
 commented out in the code chunk. Also, we can give an output of the full result 
-of each iteration. And each row should be the result from one of the iteration.
+of each iteration in a matrix form. And each row should be the result from one of the iteration.
 
 ```{r}
 solve_ols(A_3, b_3, method = "Gauss", full_result = TRUE)
@@ -79,5 +79,59 @@ solve_ols(A_3, b_3, method = "Gauss", full_result = TRUE)
 
 
 ## algo_leverage
-Also, you can implement the method by 
+Also, you can find the documentation by
 
+```{r}
+?algo_leverage
+```
+
+Also, we can try to do a simulation similar to HW1
+
+
+```{r}
+###Generate Data
+b = 500
+X = rt(500, 6)
+epsilon = rnorm(500, 0, 1)
+y = -X + epsilon
+sol_beta = lm(y~X)$coeff
+  
+###Running simulation us
+###Note that both X and Y should be 1-D here 
+beta_unif_10 = algo_leverage(y, X, size = 10, draws = 600, method = "uniform")
+beta_weighted_10 = algo_leverage(y, X, size = 10, draws = 600, method = "weighted")
+```
+
+## elnet_coord
+
+Following a similar manner, we have:
+
+```{r}
+generate_data <-function(n){
+para = c(c(2,0,-2,0,1,0,-1,0),rep(0,12))
+covmat = diag(rep(1,20))
+covmat[1,2] = .8
+covmat[2,1] = .8
+covmat[5,6] = .8
+covmat[6,5] = .8
+X = matrix(NA, n, 20)
+for (i in 1:n){
+X[i,] = mvtnorm::rmvnorm(1, rep(0, 20), sigma = covmat)
+}
+eps = rnorm(n,0,1)
+y = X%*%para + eps
+return(list(y,X))
+}
+
+data_20 = generate_data(20)
+data_50 = generate_data(50)
+data_100 = generate_data(100)
+
+b = elnet_coord(data_100[[1]],data_100[[2]], rep(0,20), alpha = .5, lambda =.5)
+library(glmnet)
+c = glmnet(data_100[[2]], data_100[[1]], alpha =  .5, lambda = .5)$beta
+```
+
+And we can find that it worked well. Although there is difference between the exact
+value for the beta, that is due to the usage of sparse matrix in glmnet package, 
+and my result is almost identical the official implement from MATLAB.
