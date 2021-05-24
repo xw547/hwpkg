@@ -19,7 +19,7 @@ Also, you can use
 wget https://github.com/xw547/hwpkg/raw/master/vignettes/my-vignette.Rmd
 ```
 
-in terminal. Or got to [this]{https://github.com/xw547/hwpkg/blob/master/vignettes/my-vignette.Rmd}
+in terminal. Or got to [this](https://github.com/xw547/hwpkg/blob/master/vignettes/my-vignette.Rmd)
 and right click Raw and "save as" to download
 
 Happy testing!
