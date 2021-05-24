@@ -1,4 +1,4 @@
-### Homework package for BTRY 6520 (Bug fixed!)
+### Homework package for BTRY 6520 (Bugs fixed!)
 This is the package that integrates the result form hw1 of BTRY6520.
 
 To try it out, use the code below
