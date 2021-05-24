@@ -16,5 +16,6 @@ Depends:
     doParallel,
     rmarkdown,
     knitr,
-    mvtnorm
+    mvtnorm,
+    glmnet
 VignetteBuilder: knitr
